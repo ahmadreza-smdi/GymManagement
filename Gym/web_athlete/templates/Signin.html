@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+{% load static%}
+{%block title%} Login {%endblock%}
+{%block background%}<body background={% static '/background/background1.jpg'%}>{%endblock%}
+{%block nav%} {%endblock%}
+{%block body %}
+<div id="login" align='center'>
+    <section style="font-family:'Courier New', Courier, monospace">
+        <h1 align='center' style="font-family:'Courier New', Courier, monospace"><b><b>Sign In</b></b></h1>
+        <p align='center' style="font-family:'Courier New', Courier, monospace">Please Fill The Form To Login</p>
+        <hr><br><br>
+        <form action='' method="POST" name='login'>
+            {%csrf_token%}
+            <label for="username"><b>Username</b></label><br>
+            <input type="text" name="username" required="required"><br><br>
+
+            <label for="password"><b>Password</b></label><br>
+            <input type="password" name="password" required="required"><br><br>
+
+            <button type="reset" id='clearbtn'>Clear</button>
+            <input type="submit" ‫;‪onclick="this.disabled=true‬;this.form.submit()" >
+
+            <a href="/forgetpass"> Forget password</a>
+            <p> {%block mis%} {%endblock%}</p>
+            <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px" required="required"> Remember me
+            </label><br>
+        </form>
+    </section>
+</div>
+{%endblock%}

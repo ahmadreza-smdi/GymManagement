@@ -1,0 +1,130 @@
+
+#register,#login{
+    position: absolute;
+	top: 35px;
+	width: 88%;	
+	padding: 18px 6% 60px 6%;
+	margin:0  35px;
+	/* border: 1px solid rgba(189, 147, 163, 0.8);
+	/* box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),	0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset; */
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+	z-index: 21;
+}
+.pp {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#settings{
+	top: 0px;
+	width: 88%;	
+	padding: 18px 6% 60px 6%;
+	margin:0  35px;
+	/* border: 1px solid rgba(189, 147, 163, 0.8);
+	/* box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),	0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset; */
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+	z-index: 21;
+}
+* {box-sizing: border-box}
+input[type=text], input[type=password] {
+    width: 25%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+hr {
+    border: 1px solid rgb(45, 59, 61);
+    margin-bottom: 25px;
+}
+
+.clearbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #474e5d;
+    padding-top: 50px;
+}
+
+label{
+    font-family: style="font-family:'Courier New', Courier, monospace";
+}
+@keyframes mymove {
+    0%   {top: 0px;}
+    25%  {top: 200px;}
+    50%  {top: 100px;}
+    75%  {top: 200px;}
+    100% {top: 0px;}
+}
+#homecomming{
+    animation-duration: 2s;
+    animation-name: slidein;
+    animation-delay: 2s;
+    animation-fill-mode: backwards;
+}
+  
+@keyframes slidein {
+from {
+    margin-left: 0%;
+    width: 300%; 
+}
+
+to {
+    margin-right:100%;
+    width: 100%;
+}
+}
+
+
+
+#welcom{
+    animation-duration: 2s;
+    animation-name: slidein;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    }
+        
+li {
+    display: inline;
+}
+#navbar a:link, a:visited {
+    display: inline;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: #FFFFFF;
+    background-color:teal;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    }
+     
+#navbar a:hover, a:active {
+background-color:rgb(7, 46, 46);
+}
+
+#navbar {
+    position: fixed;
+    top: 10px;
+    width: 100%;
+}

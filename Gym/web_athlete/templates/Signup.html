@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{% load static%}
+{%block background%}<body background={% static '/background/background1.jpg'  %}> {%endblock%}
+{%block title%} Sign up {%endblock%}
+{%block nav%} {%endblock%}
+
+{%block body%}
+<div id="register" align='center'>
+    <section style="font-family:'Courier New', Courier, monospace">
+        <h1 align='center'><b><b>Sign Up</b></b></h1>
+        <p align='center'><b>Fill The Form To Create Account</b></p>
+            <hr><br><br>
+        <form name="register" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <label for="name"><b>Name</b></label><br>
+            <input type="text" name="name" required="required"><br><br>
+            
+            <label for="username"><b>Username</b></label><br>
+            <input type="text" name="username" required="required"><br><br>
+
+            <label for="password"><b>Password</b></label><br>
+            <input type="password" name="password" required="required"><br><br>
+            
+            <label for="re-password"><b>Enter Password again:</b></label><br>
+            <input type="password" name="re-password" required="required"><br><br>
+            
+            <label for="email"><b>Email</b></label><br>
+            <input type="email" name="email" required="required"><br><br>
+           
+            
+            <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px" required="required"> Remember me
+            </label><br>
+            
+            <label>
+                <input type="checkbox" name ='agreement'checked="checked" name="term" style="margin-bottom:15px" required="required"> Agree to terms and privacy
+            </label><br>
+
+
+            <button type="reset" id='clearbtn'>Clear</button>
+            <input type="submit" ‫;‪onclick="this.disabled=true‬;this.form.submit()" >
+
+        </form>
+    </section> 
+</div>
+{%endblock%}

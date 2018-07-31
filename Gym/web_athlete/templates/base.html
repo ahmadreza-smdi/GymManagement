@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+    <head>
+        <img src={% static "/logo/logo.png"%} style='padding: 11px'alt="Logo">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> {% block title %}{%endblock%}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href={% static "/assets/main.css"%}/>
+        <script src={% static '/assets/main.js'%}></script>
+    </head>
+    {%block background%} {%endblock%}
+    {%block body%}
+
+
+
+    {%endblock%}
+    </body>
+</html>
