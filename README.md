@@ -1,2 +1,3 @@
 # django-internship
-This is a django base project for my internship
+This is a python based project with django framwork.
+for managing a gym.
