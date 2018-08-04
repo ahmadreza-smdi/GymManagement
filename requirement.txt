@@ -1,0 +1,11 @@
+install pip
+$sudo apt-get install python3-pip
+
+install django(this project is django 1.11)
+$pip3 install django==1.11
+
+go to project and run the server
+$python3 manage.py runserver
+
+go to your browser and run
+$localhost:8000
