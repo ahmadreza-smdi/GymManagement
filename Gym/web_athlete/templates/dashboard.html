@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+	<link rel="stylesheet" type="text/css" href={% static '/assets/default.css'%} />
+	<link rel="stylesheet" type="text/css" href={% static "/assets/component.css"%} />
+	<script src={% static "/assets/modernizr.custom.js"%}></script>
+{%endblock%}
+{%block background%}<body background={%static '/background/background1.jpg' %}> {%endblock%}
+{%block title%} Dashboard {%endblock%}
+{%block nav%} {%endblock%}
+{%block body%}
+<div class="container">	
+</div><!--/ Codrops top bar -->
+	<header class="clearfix">
+		<h1 align='center'><span>SALAMAT GYM</span></h1>	
+	</header>
+	<div class="main">
+		<p>Welcom to your dashboard, here you can get access and manage your account</p>
+		<div class="side">
+			<nav class="dr-menu">
+				<div class="dr-trigger"><span class="dr-icon dr-icon-menu"></span><a class="dr-label">Account</a></div>
+				<ul>
+					<li><a class="dr-icon dr-icon-user" href="#">{{user_name}}</a></li>
+					<li><a class="dr-icon dr-icon-camera" href="#">Videos</a></li>
+					<li><a class="dr-icon dr-icon-heart" href="#">Favorites</a></li>
+					<li><a class="dr-icon dr-icon-bullhorn" href="#">Subscriptions</a></li>
+					<li><a class="dr-icon dr-icon-download" href="#">Downloads</a></li>
+					<li><a class="dr-icon dr-icon-settings" href="#">Settings</a></li>
+					<li><a class="dr-icon dr-icon-switch" href="#">Logout</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+</div><!-- /container -->
+username:{{request.user.username}}
+<script src={% static "/assets/ytmenu.js"%}></script>
+{%endblock%}

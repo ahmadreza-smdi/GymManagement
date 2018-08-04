@@ -1,9 +1,9 @@
 from django.shortcuts import render,HttpResponseRedirect
-from . import models
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.contrib.auth import authenticate
+
 from django.contrib.auth.models import User
+from . import models
+
 # Create your views here.
 
 
@@ -21,7 +21,7 @@ def login(request):
         password=request.POST.get("password",'')
         user = authenticate(username=username, password=password)
         if user is not None:
-           return HttpResponseRedirect('/register')
+           return HttpResponseRedirect('/dashboard')
         else:
             return HttpResponseRedirect('/login/')
 
@@ -38,3 +38,9 @@ def register(request):
         return HttpResponseRedirect('/login/')
        
     return render(request,'Signup.html')
+
+def dashboard(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user.username
+    return render(request,'dashboard.html',{"user_name":username})
