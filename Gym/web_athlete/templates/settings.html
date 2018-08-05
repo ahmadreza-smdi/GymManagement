@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{% load static%}
+{%block background%}<body background={%static '/background/background1.jpg'%}>{%endblock%}
+{%block title%} Settings {%endblock%}
+{%block body%}
+<div id="settings" align='center'>
+    <div id="settings" align='center'>
+        <section style="font-family:'Courier New', Courier, monospace">
+            <h1 align='center'><b><b>Settings</b></b></h1>
+            <p align='center'><b>Do The Change And Click Submit</b></p>
+            <br>
+            <form name="register" action="/dashboard/settings/" method="POST">
+                {%csrf_token%}
+                <label for="name"><b>Name</b></label><br>
+                <input type="text" name="name" required="required" value="{{p.name}}"><br><br>
+
+                <label for="Skill"><b>Skill</b></label><br>
+                <input type="text" name="Skill" required="required" value="{{p.skill}}"><br><br>
+
+                <label for="age"><b>Age</b></label><br>
+                <input type="text" name="Age" value="{{p.age}}"><br><br>
+                
+                <label for="phone_number"><b>Phone number</b></label><br>
+                <input type="tel" name="phone_number" value="{{p.phone_number}}"><br><br>
+
+                <label for="Sex"><b>Sex</b></label><br>
+                <input type="text" name="Sex" required="required" value="{{p.sex}}"><br><br>
+
+                <label for="bio"><b>Bio</b></label><br>
+                <textarea name="bio" id="" cols="30" rows="10" >{{p.profile}}</textarea><br><br>
+
+                
+                <input type="submit" ‫;‪onclick="this.disabled=true‬;this.form.submit()" > 
+</div>
+{%endblock%}

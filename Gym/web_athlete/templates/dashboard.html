@@ -20,19 +20,17 @@
 			<nav class="dr-menu">
 				<div class="dr-trigger"><span class="dr-icon dr-icon-menu"></span><a class="dr-label">Account</a></div>
 				<ul>
-					<li><a class="dr-icon dr-icon-user" href="#">{{user_name}}</a></li>
-					<li><a class="dr-icon dr-icon-camera" href="#">Videos</a></li>
-					<li><a class="dr-icon dr-icon-heart" href="#">Favorites</a></li>
-					<li><a class="dr-icon dr-icon-bullhorn" href="#">Subscriptions</a></li>
-					<li><a class="dr-icon dr-icon-download" href="#">Downloads</a></li>
-					<li><a class="dr-icon dr-icon-settings" href="#">Settings</a></li>
-					<li><a class="dr-icon dr-icon-switch" href="#">Logout</a></li>
+					<li><a class="dr-icon dr-icon-user">{{user_name}}</a></li>
+					<br>
+
+					<li><a class="dr-icon dr-icon-heart" href="/dashboard/time/">Favorite Time</a></li>
+					<li><a class="dr-icon dr-icon-settings" href="/dashboard/settings/">Settings</a></li>
+					<li><a class="dr-icon dr-icon-switch" href="/dashboard/logout/">Logout</a></li>
 				</ul>
 			</nav>
 		</div>
 	</div>
 
 </div><!-- /container -->
-username:{{request.user.username}}
 <script src={% static "/assets/ytmenu.js"%}></script>
 {%endblock%}

@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{% load static%}
+{%block background%}<body background={%static '/background/background1.jpg'%}>{%endblock%}
+{%block title%} Favorite time {%endblock%}
+{%block body%}
+<div id="settings" align='center'>
+    <section style="font-family:'Courier New', Courier, monospace">
+        <h1 align='center'><b><b>Session Options</b></b></h1>
+        <p align='center'><b>Choose which sesstion would you like to go to class</b></p>
+            <br>
+            <form action="/dashboard/time/" method="POST" name="Time">
+                {%csrf_token%}
+                <select id = 'time-choose'name="time_select" id="">
+                    <option value="" selected disabled hidden>Choose here</option>
+                    {% for i in t %}
+                       <option value={{i.timee}}>{{i.timee}}</option>
+                    {%endfor%}
+                    <input type="submit" ‫;‪onclick="this.disabled=true‬;this.form.submit()" >
+
+                </select>
+            </form>
+    </section> 
+</div>
+{%endblock%}
