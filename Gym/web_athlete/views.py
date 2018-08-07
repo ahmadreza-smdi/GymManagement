@@ -2,19 +2,26 @@ from django.shortcuts import render,HttpResponseRedirect
 from django.contrib.auth import authenticate,logout,login
 from .models import Member,Fields,Time_option
 from django.contrib.auth.models import User
+import threading
+from django.utils import timezone 
 # from web_athlete.models import Class_times 
 
 # Create your views here.
-
+def loging(username,request,action):
+    now = timezone.now() 
+    f = open('log.txt','a+')
+    f.write('username = %s , time = %s , action = %s \n'%(username,now,action))
+    f.close()
+    print('DONE')
+    
 
 def main(request):
     if request.method == 'GET':
         pass
     return render(request,'index.html')
 
-
-
 def loginn(request):
+    username = request.user.username
     if request.method == 'POST':
         username=request.POST.get('username','')
         print("username:",username)
@@ -22,6 +29,7 @@ def loginn(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request,user)
+            loging(username,request,'log in')
             return HttpResponseRedirect('/dashboard')
         else:
             return HttpResponseRedirect('/login/')
@@ -36,6 +44,8 @@ def register(request):
         email = request.POST.get('email','')  
         new_save=User(username=username,password=password,email=email)
         new_save.save()
+        loging(username,request,'Regstration')
+
         return HttpResponseRedirect('/login/')
        
     return render(request,'Signup.html')
@@ -52,7 +62,9 @@ def choose_time(request):
     username = request.user.username
     if request.method == 'POST':
         Open_times=request.POST.get('time_select')
-        Member.objects.filter(user__username=username).update(class_time=Open_times)
+        a = Member.objects.filter(user__username=username).update(class_time=Open_times)
+        if a :
+            loging(username,request,'Chosen time has updated')
         return HttpResponseRedirect('/dashboard')
 
     print (username)
@@ -72,12 +84,16 @@ def settings(request):
         Sex=request.POST.get('Sex')
         Bio=request.POST.get('bio')
         birthdate=request.POST.get('birthdate')
-        Member.objects.filter(user__username=username).update(name = name ,phone_number =phone_number,sex = Sex,age = Age, skill = Skill ,profile = Bio )
+        a = Member.objects.filter(user__username=username).update(name = name ,phone_number =phone_number,sex = Sex,age = Age, skill = Skill ,profile = Bio )
+        if a:
+            loging(username,request,'Settings has updated')
         return HttpResponseRedirect('/dashboard')
     if request.method == 'GET':
         return render(request,'settings.html',{'p':p})
 
 
-def logout_view(request):
+def logout_view(request):  
+    username = request.user.username  
     logout(request)
+    loging(username,request,'log out')
     return HttpResponseRedirect('/login/')
