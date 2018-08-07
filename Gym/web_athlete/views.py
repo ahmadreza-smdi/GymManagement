@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate,logout,login
 from .models import Member,Fields,Time_option
 from django.contrib.auth.models import User
 import threading
+from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone 
 # from web_athlete.models import Class_times 
 
@@ -21,17 +22,19 @@ def main(request):
     return render(request,'index.html')
 
 def loginn(request):
-    username = request.user.username
     if request.method == 'POST':
         username=request.POST.get('username','')
         print("username:",username)
         password=request.POST.get("password",'')
+        print("password",password)
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request,user)
-            loging(username,request,'log in')
+            print("login is true")
+            #loging(username,request,'log in')
             return HttpResponseRedirect('/dashboard')
         else:
+            print("login is false")
             return HttpResponseRedirect('/login/')
 
     return render(request,'Signin.html')
@@ -39,16 +42,19 @@ def loginn(request):
 
 def register(request):
     if request.method == 'POST':
-        username = request.POST.get('username','')
-        password = request.POST.get('password','')
-        email = request.POST.get('email','')  
-        new_save=User(username=username,password=password,email=email)
-        new_save.save()
-        loging(username,request,'Regstration')
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            #return redirect('home')
 
         return HttpResponseRedirect('/login/')
-       
-    return render(request,'Signup.html')
+    else:
+        form = UserCreationForm()
+    return render(request,'Signup.html',{'form':form})
 
 def dashboard(request):
     username = None
