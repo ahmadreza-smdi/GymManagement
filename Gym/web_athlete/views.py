@@ -3,18 +3,9 @@ from django.contrib.auth import authenticate,logout,login
 from .models import Member,Fields,Time_option
 from django.contrib.auth.models import User
 import threading
+from logging import log
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone 
-# from web_athlete.models import Class_times 
-
-# Create your views here.
-def loging(username,request,action):
-    now = timezone.now() 
-    f = open('log.txt','a+')
-    f.write('username = %s , time = %s , action = %s \n'%(username,now,action))
-    f.close()
-    print('DONE')
-    
 
 def main(request):
     if request.method == 'GET':
@@ -31,7 +22,7 @@ def loginn(request):
         if user is not None:
             login(request,user)
             print("login is true")
-            loging(username,request,'log in')
+            loging(username,request,'login')
             return HttpResponseRedirect('/dashboard')
         else:
             print("login is false")
@@ -49,7 +40,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            #return redirect('home')
+            loging(username,request,'register')
 
         return HttpResponseRedirect('/login/')
     else:
@@ -101,5 +92,5 @@ def settings(request):
 def logout_view(request):  
     username = request.user.username  
     logout(request)
-    loging(username,request,'log out')
+    loging(username,request,'logout')
     return HttpResponseRedirect('/login/')
