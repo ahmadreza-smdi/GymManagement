@@ -31,7 +31,7 @@ def loginn(request):
         if user is not None:
             login(request,user)
             print("login is true")
-            #loging(username,request,'log in')
+            loging(username,request,'log in')
             return HttpResponseRedirect('/dashboard')
         else:
             print("login is false")
