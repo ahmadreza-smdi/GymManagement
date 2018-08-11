@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate,logout,login
 from .models import Member,Fields,Time_option
 from django.contrib.auth.models import User
 import threading
-from logging import log
+from log_package import logg
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone 
 
@@ -22,7 +22,7 @@ def loginn(request):
         if user is not None:
             login(request,user)
             print("login is true")
-            loging(username,request,'login')
+            logg.loging(username,request,'login')
             return HttpResponseRedirect('/dashboard')
         else:
             print("login is false")
@@ -40,7 +40,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            loging(username,request,'register')
+            logg.loging(username,request,'register')
 
         return HttpResponseRedirect('/login/')
     else:
@@ -61,7 +61,7 @@ def choose_time(request):
         Open_times=request.POST.get('time_select')
         a = Member.objects.filter(user__username=username).update(class_time=Open_times)
         if a :
-            loging(username,request,'Chosen time has updated')
+            logg.loging(username,request,'Chosen time has updated')
         return HttpResponseRedirect('/dashboard')
 
     print (username)
@@ -83,7 +83,7 @@ def settings(request):
         birthdate=request.POST.get('birthdate')
         a = Member.objects.filter(user__username=username).update(name = name ,phone_number =phone_number,sex = Sex,age = Age, skill = Skill ,profile = Bio )
         if a:
-            loging(username,request,'Settings has updated')
+            logg.loging(username,request,'Settings has updated')
         return HttpResponseRedirect('/dashboard')
     if request.method == 'GET':
         return render(request,'settings.html',{'p':p})
@@ -92,5 +92,5 @@ def settings(request):
 def logout_view(request):  
     username = request.user.username  
     logout(request)
-    loging(username,request,'logout')
+    logg.loging(username,request,'logout')
     return HttpResponseRedirect('/login/')
