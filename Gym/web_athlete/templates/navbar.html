@@ -1,0 +1,14 @@
+{% load static%}
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href={% static "/assets/nav.css"%}/>
+    <link rel="stylesheet" type="text/css" href={% static '/assets/default.css'%} />
+	<link rel="stylesheet" type="text/css" href={% static "/assets/component.css"%} />
+	<script src={% static "/assets/modernizr.custom.js"%}></script>
+</head>
+<div class="scrollmenu" align='center'>
+    <li><a class="dr-icon dr-icon-user">{{user.username}}</a></li>   
+    <li><a class="dr-icon dr-icon" href="/dashboard">Dashboard</a></li>
+    <li><a class="dr-icon dr-icon-heart" href="/dashboard/time/">Favorite Time</a></li>
+    <li><a class="dr-icon dr-icon-settings" href="/dashboard/settings/">Settings</a></li>
+    <li><a class="dr-icon dr-icon-switch" href="/dashboard/logout/">Logout</a></li>
+</div> 

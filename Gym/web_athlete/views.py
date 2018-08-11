@@ -7,6 +7,12 @@ from log_package import logg
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone 
 
+def logged_in(request):
+    if request.user.is_authenticated:
+        return True
+    else:
+        return False
+
 def main(request):
     if request.method == 'GET':
         pass
@@ -48,47 +54,54 @@ def register(request):
     return render(request,'Signup.html',{'form':form})
 
 def dashboard(request):
-    username = None
     if request.user.is_authenticated():
         username = request.user.username
-    return render(request,'dashboard.html',{"user_name":username})
+        return render(request,'dashboard.html',{"user_name":username})
+    else:
+        return HttpResponseRedirect('/login/')
 
 
 
 def choose_time(request):
-    username = request.user.username
-    if request.method == 'POST':
-        Open_times=request.POST.get('time_select')
-        a = Member.objects.filter(user__username=username).update(class_time=Open_times)
-        if a :
-            logg.loging(username,request,'Chosen time has updated')
-        return HttpResponseRedirect('/dashboard')
+    if request.user.is_authenticated():
+        username = request.user.username
+        if request.method == 'POST':
+            Open_times=request.POST.get('time_select')
+            a = Member.objects.filter(user__username=username).update(class_time=Open_times)
+            if a :
+                logg.loging(username,request,'Chosen time has updated')
+            return HttpResponseRedirect('/dashboard')
 
-    print (username)
-    t = Time_option.objects.all()
-    return render(request,'time.html',{'t':t})
+        print (username)
+        t = Time_option.objects.all()
+        return render(request,'time.html',{'t':t})
+    else:
+        return HttpResponseRedirect('/login/')
 
 def settings(request):
-    username = request.user.username
-    p = Member.objects.get(user__username = username)
-    print(p.phone_number)
-    if request.method == 'POST':
+    if request.user.is_authenticated():
         username = request.user.username
-        name=request.POST.get('name')
-        Skill=request.POST.get('Skill')
-        Age=request.POST.get('Age')
-        phone_number=request.POST.get('phone_number')
-        Sex=request.POST.get('Sex')
-        Bio=request.POST.get('bio')
-        birthdate=request.POST.get('birthdate')
-        a = Member.objects.filter(user__username=username).update(name = name ,phone_number =phone_number,sex = Sex,age = Age, skill = Skill ,profile = Bio )
-        if a:
-            logg.loging(username,request,'Settings has updated')
-        return HttpResponseRedirect('/dashboard')
-    if request.method == 'GET':
-        return render(request,'settings.html',{'p':p})
+        p = Member.objects.get(user__username = username)
+        print(p.phone_number)
+        if request.method == 'POST':
+            username = request.user.username
+            name=request.POST.get('name')
+            Skill=request.POST.get('Skill')
+            Age=request.POST.get('Age')
+            phone_number=request.POST.get('phone_number')
+            Sex=request.POST.get('Sex')
+            Bio=request.POST.get('bio')
+            birthdate=request.POST.get('birthdate')
+            a = Member.objects.filter(user__username=username).update(name = name ,phone_number =phone_number,sex = Sex,age = Age, skill = Skill ,profile = Bio )
+            if a:
+                logg.loging(username,request,'Settings has updated')
+            return HttpResponseRedirect('/dashboard')
+        if request.method == 'GET':
+            return render(request,'settings.html',{'p':p})
+    else:
+        return HttpResponseRedirect('/login/')
 
-
+        
 def logout_view(request):  
     username = request.user.username  
     logout(request)
