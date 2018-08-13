@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 # Create your models here.
 
 class Time_option(models.Model):
@@ -14,6 +15,11 @@ class Fields(models.Model):
         return self.name
 
 
+class F_t(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    time = models.DateField(auto_now=datetime.datetime.now())
+    Field = models.ForeignKey(Fields, on_delete=models.CASCADE)
+    time_options = models.ForeignKey(Time_option, on_delete=models.CASCADE)
 
 
 

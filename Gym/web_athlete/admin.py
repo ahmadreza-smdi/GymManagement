@@ -4,3 +4,4 @@ from . import models
 admin.site.register(models.Fields)
 admin.site.register(models.Member)
 admin.site.register(models.Time_option)
+admin.site.register(models.F_t)
