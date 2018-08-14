@@ -7,6 +7,7 @@ from log_package import logg
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone 
 
+global site_visitor
 def logged_in(request):
     if request.user.is_authenticated:
         return True

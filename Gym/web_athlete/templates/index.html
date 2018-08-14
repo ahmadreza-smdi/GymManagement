@@ -18,4 +18,69 @@
         </a>
     </div>
 </div>
+<div>
+    <script>
+        window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+                text: "Site Traffic"
+            },
+            axisX:{
+                valueFormatString: "DD MMM",
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true
+                }
+            },
+            axisY: {
+                title: "Number of Visits",
+                crosshair: {
+                    enabled: true
+                }
+            },
+            toolTip:{
+                shared:true
+            },  
+            legend:{
+                cursor:"pointer",
+                verticalAlign: "bottom",
+                horizontalAlign: "left",
+                dockInsidePlotArea: true,
+                itemclick: toogleDataSeries
+            },
+            data: [{
+                type: "line",
+                showInLegend: true,
+                name: "Total Visit",
+                markerType: "square",
+                xValueFormatString: "DD MMM, YYYY",
+                color: "#F08080",
+                dataPoints: [
+                    {%for i in data%}
+                    { y: 10,x:6},{y: 12},{y: 15},{y: 10},{y: 10},
+                    {%endfor%}
+                ]
+            },
+            ]
+        });
+        chart.render();
+        
+        function toogleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else{
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+        
+        }
+        </script>
+        </head>
+        <body>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</div>
 {%endblock%}
